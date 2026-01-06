@@ -95,7 +95,7 @@ export const DiagnosticWizard: React.FC<Props> = ({ onComplete, onBack }) => {
   })) : [];
 
   const handleContract = (serviceTitle: string) => {
-    const phoneNumber = "5585986150696";
+    const phoneNumber = "5585986150686";
     let message = `Olá! Fiz o diagnóstico empresarial e gostaria de saber mais sobre: ${serviceTitle}`;
     
     if (result) {

@@ -70,7 +70,7 @@ export const ChatWidget: React.FC<{ onNavigate: (view: string) => void }> = ({ o
           };
           break;
         case 'whatsapp':
-          window.open('https://wa.me/5585986150696', '_blank');
+          window.open('https://wa.me/5585986150686', '_blank');
           botResponse = {
              id: (Date.now() + 1).toString(),
              sender: 'bot',

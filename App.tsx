@@ -47,7 +47,7 @@ const App: React.FC = () => {
   };
 
   const openWhatsApp = (message: string) => {
-    const phoneNumber = "5585986150696";
+    const phoneNumber = "5585986150686";
     const encodedMessage = encodeURIComponent(message);
     window.open(`https://wa.me/${phoneNumber}?text=${encodedMessage}`, '_blank');
   };
