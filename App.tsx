@@ -459,4 +459,6 @@ const App: React.FC = () => {
   return <AppContent />;
 };
 
+
+// Rebuild with correct base path for GitHub Pages deployment
 export default App;
