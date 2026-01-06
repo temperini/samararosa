@@ -4,7 +4,7 @@ import { DiagnosticResult, ServiceOffer } from '../types';
 import { ArrowRight, Check, RefreshCw, Trophy, TrendingUp, Star, Rocket, Target, ShieldCheck } from 'lucide-react';
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer, Tooltip } from 'recharts';
 
-const SAMARA_PHOTO = "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=200&h=200";
+const SAMARA_PHOTO = "https://temperini.github.io/samara-consult/foto_samara_rosa_consultora_pme_oticas_ceo_5_estrelas.jpg";
 
 interface Props {
   onComplete: () => void;
@@ -96,7 +96,12 @@ export const DiagnosticWizard: React.FC<Props> = ({ onComplete, onBack }) => {
 
   const handleContract = (serviceTitle: string) => {
     const phoneNumber = "5585986150696";
-    const message = `Olá! Fiz o diagnóstico empresarial e gostaria de saber mais sobre: ${serviceTitle}`;
+    let message = `Olá! Fiz o diagnóstico empresarial e gostaria de saber mais sobre: ${serviceTitle}`;
+    
+    if (result) {
+        message += `\nMeu diagnóstico foi: ${result.level} (${result.score}%).`;
+    }
+
     const encodedMessage = encodeURIComponent(message);
     window.open(`https://wa.me/${phoneNumber}?text=${encodedMessage}`, '_blank');
   };
@@ -182,6 +187,11 @@ export const DiagnosticWizard: React.FC<Props> = ({ onComplete, onBack }) => {
                   <div className="absolute -right-8 -top-8 w-32 h-32 bg-brand-gold/10 rounded-full group-hover:scale-150 transition-transform duration-700"></div>
                   
                   <div className="relative z-10 mb-6">
+                    {service.isNew && (
+                        <span className="bg-white text-brand-action px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest mb-2 inline-block mr-2">
+                          NOVO
+                        </span>
+                    )}
                     <span className="bg-brand-gold text-brand-dark px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest mb-4 inline-block">
                       Solução Indicada
                     </span>

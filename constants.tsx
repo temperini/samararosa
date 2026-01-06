@@ -14,7 +14,8 @@ export const OFFERS: ServiceOffer[] = [
       'Conclusão rápida em 2 semanas'
     ],
     cta: 'Contratar Mentoria Prática',
-    highlight: false
+    highlight: false,
+    badge: 'Mais Popular'
   },
   {
     id: 'jornada-online',
@@ -27,14 +28,15 @@ export const OFFERS: ServiceOffer[] = [
       'Aprenda no seu ritmo',
       'Certificado de conclusão'
     ],
-    cta: 'Começar a Jornada',
-    highlight: false
+    cta: 'ENTRAR NA LISTA',
+    highlight: false,
+    badge: 'Em Breve'
   },
   {
     id: 'jornada-presencial',
     title: 'Jornada Completa CEO 5 Estrelas',
-    priceDisplay: 'R$ 4.999',
-    originalPrice: 'R$ 5.999',
+    priceDisplay: 'R$ 6.999',
+    originalPrice: 'R$ 8.999',
     features: [
       'Consultoria completa',
       'Realizada pela própria Samara Rosa',
@@ -42,20 +44,31 @@ export const OFFERS: ServiceOffer[] = [
       'Avaliações mensais de evolução'
     ],
     cta: 'Aplicar para Consultoria',
-    highlight: true
+    highlight: true,
+    badge: 'Premium'
   },
   {
     id: 'specialized',
-    title: 'Mentorias & Palestras',
+    title: 'Eventos, Palestras e Projetos Especiais',
     priceDisplay: 'Sob Consulta',
     features: [
-      'Conselhos para PME',
-      'Palestras: "De empreendedora à empresária"',
-      'Workshops de Vendas e SAC',
-      'Personalizado para sua empresa'
+      'Atuação em Conselhos para PME',
+      {
+        text: 'Palestra + Workshop: CEO 5 Estrelas: De empreendedora à empresária - a real transformação',
+        tooltip: 'O caminho estratégico para deixar de "apagar incêndios" e assumir, com excelência a governança do seu negócio.'
+      },
+      {
+        text: 'Palestra: Pé na Estrada: Mulher, Filha, Mãe Atípica, Motociclista e CEO',
+        tooltip: 'Motivação, resiliência, equilíbrio e a força da liderança feminina em múltiplas facetas.'
+      },
+      {
+        text: 'Workshop: Venda e Entregue Como Nunca',
+        tooltip: 'Alta performance para times de vendas, comerciais, empresários, SAC e Sucesso do Cliente.'
+      }
     ],
     cta: 'Solicitar Orçamento',
-    highlight: false
+    highlight: false,
+    badge: 'Personalizado'
   }
 ];
 

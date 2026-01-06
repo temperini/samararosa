@@ -1,22 +1,17 @@
 export type ViewState = 'home' | 'diagnostic' | 'results';
 
-export interface AccessibilityState {
-  highContrast: boolean;
-  fontSize: number; // 1 = normal, 1.15 = large, 1.3 = extra large
-  dyslexicFont: boolean;
-  grayscale: boolean;
-  readingGuide: boolean;
-  lineHeight: number; // 1 = normal, 1.5 = wide, 2 = extra wide
-}
+export type ServiceFeature = string | { text: string; tooltip: string };
 
 export interface ServiceOffer {
   id: string;
   title: string;
   priceDisplay: string;
   originalPrice?: string;
-  features: string[];
+  features: ServiceFeature[];
   cta: string;
   highlight?: boolean;
+  isNew?: boolean;
+  badge?: string;
 }
 
 export interface Question {
@@ -32,4 +27,13 @@ export interface DiagnosticResult {
   level: 'Iniciante' | 'Em Crescimento' | 'CEO 5 Estrelas';
   tips: string[];
   recommendedServiceIds: string[];
+}
+
+export interface AccessibilityState {
+  highContrast: boolean;
+  fontSize: number;
+  dyslexicFont: boolean;
+  grayscale: boolean;
+  readingGuide: boolean;
+  lineHeight: number;
 }

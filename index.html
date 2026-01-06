@@ -37,56 +37,6 @@
         outline-offset: 4px;
       }
       
-      /* High Contrast Overrides */
-      .high-contrast {
-        background-color: #000 !important;
-        color: #fff !important;
-      }
-      .high-contrast * {
-        background-color: transparent !important;
-        color: #fff !important;
-        border-color: #fff !important;
-        box-shadow: none !important;
-        text-shadow: none !important;
-      }
-      .high-contrast .bg-brand-action, 
-      .high-contrast button,
-      .high-contrast .bg-brand-dark {
-        background-color: #fff !important;
-        color: #000 !important;
-        border: 2px solid #fff !important;
-      }
-      .high-contrast a {
-        text-decoration: underline !important;
-        color: #FFFF00 !important;
-      }
-
-      /* Dyslexic Font */
-      .dyslexic-mode * {
-        font-family: 'Lexend', sans-serif !important;
-      }
-
-      /* Grayscale */
-      .grayscale-mode {
-        filter: grayscale(100%) !important;
-      }
-
-      /* Reading Guide */
-      #reading-guide {
-        position: fixed;
-        left: 0;
-        width: 100%;
-        height: 4px;
-        background-color: rgba(180, 92, 56, 0.7);
-        pointer-events: none;
-        z-index: 9999;
-        display: none;
-        box-shadow: 0 0 10px rgba(180, 92, 56, 0.5);
-      }
-      .guide-active #reading-guide {
-        display: block;
-      }
-
       html {
         scroll-behavior: smooth;
       }
@@ -108,17 +58,6 @@
 </script>
 </head>
   <body class="text-brand-dark antialiased selection:bg-brand-gold selection:text-white">
-    <div id="reading-guide"></div>
     <div id="root"></div>
-    <script>
-      // Global reading guide follow logic
-      document.addEventListener('mousemove', (e) => {
-        const guide = document.getElementById('reading-guide');
-        if (guide) {
-          guide.style.top = (e.clientY - 2) + 'px';
-        }
-      });
-    </script>
-      <script type="module" src="./index.tsx"></script>
   </body>
 </html>
