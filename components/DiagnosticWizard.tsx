@@ -203,7 +203,7 @@ export const DiagnosticWizard: React.FC<Props> = ({ onComplete, onBack }) => {
                     {service.features.slice(0, 3).map((feat, i) => (
                       <li key={i} className="flex items-center gap-3 text-sm text-gray-300 font-medium">
                         <ShieldCheck size={16} className="text-brand-gold shrink-0" />
-                        <span>{feat}</span>
+                        <span>{typeof feat === 'string' ? feat : feat.text}</span>
                       </li>
                     ))}
                   </ul>

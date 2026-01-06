@@ -4,9 +4,10 @@ import { OFFERS } from './constants';
 import { DiagnosticWizard } from './components/DiagnosticWizard';
 import { 
   Menu, X, Star, ArrowRight, 
-  BarChart, Users, Target, CheckCircle, Check, Award, ShieldCheck,
-  Store, LockKeyholeOpen, Settings, DollarSign, MessageCircle,
-  Package, Handshake, UserPlus, Briefcase, Truck, Megaphone, Cpu, Info
+  BarChart, CheckCircle, Check, Award, ShieldCheck,
+  Store, Settings, DollarSign, MessageCircle,
+  Package, Handshake, UserPlus, Truck, Megaphone, Cpu, Info,
+  Users, Target
 } from 'lucide-react';
 
 const SAMARA_PHOTO = "https://temperini.github.io/samara-consult/foto_samara_rosa_consultora_pme_oticas_ceo_5_estrelas.jpg";
@@ -441,9 +442,11 @@ const App: React.FC = () => {
 
                 <button 
                   onClick={() => handleContract(offer.title)}
-                  className="w-full bg-brand-action hover:bg-white hover:text-brand-action text-white py-4 rounded-xl font-bold transition-all flex items-center justify-center gap-2 uppercase tracking-widest text-xs relative z-10 shadow-lg"
-                  disabled={true}
-                  style={{cursor: 'not-allowed', opacity: 0.5}}
+                  className={`w-full py-4 rounded-xl font-bold transition-all uppercase tracking-widest text-xs ${
+                    offer.highlight 
+                      ? 'bg-brand-action text-white hover:bg-brand-dark' 
+                      : 'bg-brand-stone text-brand-dark hover:bg-gray-200'
+                  }`}
                 >
                   {offer.cta}
                 </button>
