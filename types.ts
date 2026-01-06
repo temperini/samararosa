@@ -7,6 +7,7 @@ export interface ServiceOffer {
   title: string;
   priceDisplay: string;
   originalPrice?: string;
+  installment?: string;
   features: ServiceFeature[];
   cta: string;
   highlight?: boolean;

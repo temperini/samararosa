@@ -415,7 +415,10 @@ const App: React.FC = () => {
                   {offer.originalPrice && (
                     <span className="text-xs text-gray-400 line-through block font-bold mb-1">{offer.originalPrice}</span>
                   )}
-                  <span className="text-3xl font-bold text-brand-safe tracking-tighter">{offer.priceDisplay}</span>
+                  <span className="text-3xl font-bold text-brand-safe tracking-tighter block">{offer.priceDisplay}</span>
+                  {offer.installment && (
+                    <span className="text-xs text-gray-500 font-bold mt-1 block">{offer.installment}</span>
+                  )}
                 </div>
 
                 <ul className="flex-grow space-y-4 mb-10">

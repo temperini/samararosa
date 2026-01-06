@@ -6,7 +6,8 @@ export const OFFERS: ServiceOffer[] = [
   {
     id: 'mentoria-pratica',
     title: 'Mentoria Prática',
-    priceDisplay: 'R$ 299',
+    priceDisplay: 'R$ 399',
+    installment: 'ou 2x de R$ 229,43',
     features: [
       '01 mentoria online de até 02 horas',
       'Relatório Diagnóstico (Método CEO 5 Estrelas)',
@@ -20,8 +21,9 @@ export const OFFERS: ServiceOffer[] = [
   {
     id: 'jornada-online',
     title: 'Jornada Online CEO Óptica',
-    priceDisplay: 'R$ 499',
-    originalPrice: 'R$ 699',
+    priceDisplay: 'R$ 599',
+    originalPrice: 'R$ 899',
+    installment: 'ou 12x de R$ 57,40',
     features: [
       'Acesso a conteúdos gravados por 02 anos',
       '20 passos do Método CEO Óptica',
@@ -37,6 +39,7 @@ export const OFFERS: ServiceOffer[] = [
     title: 'Jornada Completa CEO 5 Estrelas',
     priceDisplay: 'R$ 6.999',
     originalPrice: 'R$ 8.999',
+    installment: 'ou 12x de R$ 670,74',
     features: [
       'Consultoria completa',
       'Realizada pela própria Samara Rosa',

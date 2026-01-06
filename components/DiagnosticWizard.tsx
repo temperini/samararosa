@@ -197,6 +197,9 @@ export const DiagnosticWizard: React.FC<Props> = ({ onComplete, onBack }) => {
                     </span>
                     <h4 className="text-xl font-bold font-serif mb-2">{service.title}</h4>
                     <p className="text-3xl font-bold text-brand-gold tracking-tighter">{service.priceDisplay}</p>
+                    {service.installment && (
+                      <p className="text-xs text-gray-300 font-bold mt-1">{service.installment}</p>
+                    )}
                   </div>
 
                   <ul className="flex-grow space-y-3 mb-8 relative z-10">
