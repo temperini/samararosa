@@ -21,9 +21,7 @@ jobs:
         run: npm install
       
       - name: Build
-          env:
-      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-    run: npm run build
+          run: GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }} npm run build
       
       - name: Deploy to GitHub Pages
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
