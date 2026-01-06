@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Samara Rosa - Consultoria e Mentoria para PMEs e Óticas. Transforme sua gestão com o Método CEO Óptica 5 Estrelas." />
+    <title>Samara Rosa | CEO Óptica 5 Estrelas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              brand: {
+                gold: '#C5A059',      // Ouro Metálico
+                dark: '#1C1C1C',      // Grafite Empresarial
+                action: '#B45C38',    // Terracota
+                safe: '#2D5A27',      // Verde
+                stone: '#F5F5F4',     // Fundo Stone
+                white: '#FFFFFF'
+              }
+            },
+            fontFamily: {
+              sans: ['Inter', 'system-ui', 'sans-serif'],
+              serif: ['Merriweather', 'serif'],
+              dyslexic: ['Lexend', 'sans-serif']
+            }
+          }
+        }
+      }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Merriweather:ital,wght@0,400;0,700;1,400&family=Lexend:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+      :focus-visible {
+        outline: 4px solid #C5A059;
+        outline-offset: 4px;
+      }
+      
+      /* High Contrast Overrides */
+      .high-contrast {
+        background-color: #000 !important;
+        color: #fff !important;
+      }
+      .high-contrast * {
+        background-color: transparent !important;
+        color: #fff !important;
+        border-color: #fff !important;
+        box-shadow: none !important;
+        text-shadow: none !important;
+      }
+      .high-contrast .bg-brand-action, 
+      .high-contrast button,
+      .high-contrast .bg-brand-dark {
+        background-color: #fff !important;
+        color: #000 !important;
+        border: 2px solid #fff !important;
+      }
+      .high-contrast a {
+        text-decoration: underline !important;
+        color: #FFFF00 !important;
+      }
+
+      /* Dyslexic Font */
+      .dyslexic-mode * {
+        font-family: 'Lexend', sans-serif !important;
+      }
+
+      /* Grayscale */
+      .grayscale-mode {
+        filter: grayscale(100%) !important;
+      }
+
+      /* Reading Guide */
+      #reading-guide {
+        position: fixed;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background-color: rgba(180, 92, 56, 0.7);
+        pointer-events: none;
+        z-index: 9999;
+        display: none;
+        box-shadow: 0 0 10px rgba(180, 92, 56, 0.5);
+      }
+      .guide-active #reading-guide {
+        display: block;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        background-color: #F5F5F4;
+        transition: line-height 0.2s ease;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "recharts": "https://esm.sh/recharts@^3.6.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0"
+  }
+}
+</script>
+</head>
+  <body class="text-brand-dark antialiased selection:bg-brand-gold selection:text-white">
+    <div id="reading-guide"></div>
+    <div id="root"></div>
+    <script>
+      // Global reading guide follow logic
+      document.addEventListener('mousemove', (e) => {
+        const guide = document.getElementById('reading-guide');
+        if (guide) {
+          guide.style.top = (e.clientY - 2) + 'px';
+        }
+      });
+    </script>
+  </body>
+</html>
