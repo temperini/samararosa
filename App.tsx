@@ -1,0 +1,462 @@
+import React, { useState } from 'react';
+import { ViewState } from './types';
+import { OFFERS } from './constants';
+import { DiagnosticWizard } from './components/DiagnosticWizard';
+import { 
+  Menu, X, Star, ArrowRight, 
+  BarChart, Users, Target, CheckCircle, Check, Award, ShieldCheck,
+  Store, LockKeyholeOpen, Settings, DollarSign, MessageCircle
+} from 'lucide-react';
+
+const SAMARA_PHOTO = "/samara-rosa.jpg";
+
+const AppContent: React.FC = () => {
+  const [view, setView] = useState<ViewState>('home');
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const navigateTo = (newView: ViewState) => {
+    setView(newView);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setIsMenuOpen(false);
+  };
+
+  const scrollToSection = (sectionId: string) => {
+    const scroll = () => {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        const headerOffset = 100; // Adjust for header height + padding
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.scrollY - headerOffset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth"
+        });
+      }
+    };
+
+    if (view !== 'home') {
+      setView('home');
+      setTimeout(scroll, 100); // Wait for render
+    } else {
+      scroll();
+    }
+    setIsMenuOpen(false);
+  };
+
+  const openWhatsApp = (message: string) => {
+    const phoneNumber = "5585986150696";
+    const encodedMessage = encodeURIComponent(message);
+    window.open(`https://wa.me/${phoneNumber}?text=${encodedMessage}`, '_blank');
+  };
+
+  const Header = () => (
+    <header className="fixed top-0 left-0 w-full bg-white/95 backdrop-blur-md shadow-sm z-40 transition-all border-b border-brand-stone">
+      <div className="container mx-auto px-4 h-20 flex items-center justify-between">
+        <div 
+          className="font-serif font-bold text-2xl text-brand-dark cursor-pointer tracking-tight group" 
+          onClick={() => navigateTo('home')}
+        >
+          Samara<span className="text-brand-gold group-hover:text-brand-action transition-colors">.</span>Rosa
+        </div>
+
+        <nav className="hidden md:flex items-center gap-8">
+          <button onClick={() => scrollToSection('metodo')} className="text-brand-dark hover:text-brand-action font-semibold transition-colors">Método</button>
+          <button onClick={() => scrollToSection('quem-sou')} className="text-brand-dark hover:text-brand-action font-semibold transition-colors">Quem Sou</button>
+          <button onClick={() => scrollToSection('servicos')} className="text-brand-dark hover:text-brand-action font-semibold transition-colors">Serviços</button>
+          <button 
+            onClick={() => navigateTo('diagnostic')} 
+            className="bg-brand-action hover:bg-brand-dark text-white px-6 py-2 rounded-full font-bold transition-all shadow-md hover:shadow-lg flex items-center gap-2 uppercase text-xs tracking-widest"
+          >
+            <BarChart size={16} />
+            Diagnóstico Gratuito
+          </button>
+        </nav>
+
+        <div className="flex items-center gap-4">
+          <button 
+            className="md:hidden p-2 text-brand-dark"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Menu"
+          >
+            {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+          </button>
+        </div>
+      </div>
+
+      {isMenuOpen && (
+        <div className="md:hidden absolute top-20 left-0 w-full bg-white shadow-xl border-t border-brand-stone p-6 flex flex-col gap-4 animate-fade-in">
+          <button onClick={() => scrollToSection('metodo')} className="py-2 text-lg font-bold text-brand-dark text-left">Método</button>
+          <button onClick={() => scrollToSection('quem-sou')} className="py-2 text-lg font-bold text-brand-dark text-left">Quem Sou</button>
+          <button onClick={() => scrollToSection('servicos')} className="py-2 text-lg font-bold text-brand-dark text-left">Serviços</button>
+          <button 
+             onClick={() => navigateTo('diagnostic')}
+             className="w-full bg-brand-action text-white py-3 rounded-lg font-bold uppercase tracking-widest"
+          >
+            Fazer Diagnóstico
+          </button>
+        </div>
+      )}
+    </header>
+  );
+
+  const Footer = () => (
+    <footer className="bg-brand-dark text-white pt-16 pb-8">
+      <div className="container mx-auto px-4">
+        <div className="grid md:grid-cols-3 gap-12 mb-12">
+          <div className="col-span-1 md:col-span-2">
+            <h3 className="font-serif text-2xl font-bold mb-4 tracking-tight">Samara Rosa</h3>
+            <p className="text-gray-400 max-w-sm mb-6 leading-relaxed">
+              Transformando a gestão de pequenas e médias empresas com experiência, sustentabilidade e resultados práticos.
+            </p>
+            <div className="flex gap-4">
+               <button 
+                  onClick={() => openWhatsApp("Olá! Vim pelo site e gostaria de entrar em contato.")}
+                  className="flex items-center gap-2 text-brand-gold hover:text-white transition-colors font-bold uppercase text-xs tracking-widest"
+               >
+                 <MessageCircle size={18} />
+                 Falar no WhatsApp
+               </button>
+            </div>
+          </div>
+          
+          <div>
+            <h4 className="font-bold text-sm mb-4 text-brand-gold uppercase tracking-widest">Links Rápidos</h4>
+            <ul className="space-y-2 text-gray-400 font-medium">
+              <li><button onClick={() => navigateTo('home')} className="hover:text-white transition-colors text-left w-full">Início</button></li>
+              <li><button onClick={() => scrollToSection('metodo')} className="hover:text-white transition-colors text-left w-full">Jornada CEO 5 Estrelas</button></li>
+              <li><button onClick={() => scrollToSection('servicos')} className="hover:text-white transition-colors text-left w-full">Serviços</button></li>
+              <li><button onClick={() => navigateTo('diagnostic')} className="hover:text-white transition-colors text-left w-full">Diagnóstico</button></li>
+            </ul>
+          </div>
+        </div>
+        
+        <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500 font-medium uppercase tracking-tighter">
+          <p>© {new Date().getFullYear()} Samara Rosa. Todos os direitos reservados.</p>
+          <p className="mt-2 md:mt-0">Gestão • Governança • Excelência</p>
+        </div>
+      </div>
+    </footer>
+  );
+
+  if (view === 'diagnostic') {
+    return (
+      <div className="min-h-screen flex flex-col bg-brand-stone">
+        <Header />
+        <main className="flex-grow container mx-auto px-4 pt-32 pb-16">
+          <div className="text-center mb-12 animate-fade-in-down">
+            <h1 className="text-4xl md:text-5xl font-serif font-bold text-brand-dark mb-4">
+              Diagnóstico Empresarial <span className="text-brand-action">Gratuito</span>
+            </h1>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Descubra em qual estágio de maturidade sua empresa está e receba dicas personalizadas.
+            </p>
+          </div>
+          <DiagnosticWizard 
+            onComplete={() => navigateTo('home')} 
+            onBack={() => navigateTo('home')}
+          />
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen flex flex-col bg-brand-stone">
+      <Header />
+      
+      <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-white">
+        <div className="absolute top-0 right-0 w-1/3 h-full bg-brand-gold/5 -skew-x-12 transform origin-top-right z-0"></div>
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="animate-fade-in-left">
+              <div className="inline-flex items-center gap-2 bg-brand-stone text-brand-dark px-4 py-1.5 rounded-full text-xs font-bold mb-6 border border-gray-100 uppercase tracking-widest">
+                <Star size={14} className="fill-brand-gold text-brand-gold" />
+                Autoridade em Gestão Óptica
+              </div>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-brand-dark leading-tight mb-8">
+                Transforme Sua Empresa em um <span className="text-brand-action">Negócio 5 Estrelas</span>
+              </h1>
+              <p className="text-xl text-gray-600 mb-8 max-w-lg leading-relaxed">
+                Consultoria especializada para Óticas e Pequenas & Médias Empresas (PMEs). Método comprovado que acelera seu crescimento com excelência.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <button 
+                  onClick={() => navigateTo('diagnostic')}
+                  className="bg-brand-action hover:bg-brand-dark text-white px-8 py-4 rounded-lg font-bold text-lg shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2 uppercase tracking-wide"
+                >
+                  Diagnóstico Gratuito <ArrowRight size={20} />
+                </button>
+                <button 
+                  onClick={() => scrollToSection('servicos')}
+                  className="bg-white border-2 border-brand-dark text-brand-dark hover:bg-brand-stone px-8 py-4 rounded-lg font-bold text-lg transition-all flex items-center justify-center uppercase tracking-wide"
+                >
+                  Ver Serviços
+                </button>
+              </div>
+            </div>
+            
+            <div className="relative animate-fade-in-right">
+              <div className="relative z-10 mx-auto w-full max-w-md aspect-[4/5] rounded-[2rem] overflow-hidden shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] border-8 border-brand-stone bg-brand-stone">
+                <img 
+                  src={SAMARA_PHOTO} 
+                  alt="Samara Rosa - Retrato Profissional" 
+                  className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-700"
+                  loading="eager"
+                />
+                <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-brand-dark/90 to-transparent p-8 pt-24 text-white">
+                  <p className="font-serif text-2xl font-bold tracking-tight">Samara Rosa</p>
+                  <p className="text-brand-gold font-bold uppercase tracking-widest text-xs mt-1">Fundadora Óticas Sião</p>
+                </div>
+              </div>
+              <div className="absolute top-10 -left-6 bg-white p-5 rounded-xl shadow-xl border-l-4 border-brand-gold max-w-[150px] z-20">
+                <p className="text-3xl font-bold text-brand-dark">30+</p>
+                <p className="text-xs text-gray-500 font-bold uppercase tracking-tight mt-1 leading-tight">Anos de Experiência Real</p>
+              </div>
+              <div className="absolute bottom-20 -right-6 bg-white p-5 rounded-xl shadow-xl border-l-4 border-brand-action max-w-[150px] z-20">
+                <p className="text-3xl font-bold text-brand-dark">100%</p>
+                <p className="text-xs text-gray-500 font-bold uppercase tracking-tight mt-1 leading-tight">Método Prático e Testado</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="quem-sou" className="py-24 bg-brand-stone border-y border-gray-200">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <div className="flex flex-col items-center text-center mb-16">
+                <div className="bg-brand-dark text-brand-gold p-3 rounded-2xl mb-6">
+                    <Award size={32} />
+                </div>
+                <h2 className="text-3xl md:text-5xl font-serif font-bold text-brand-dark mb-4">Quem é Samara Rosa</h2>
+                <p className="text-xl text-brand-action font-serif italic mb-8 font-bold">Líder por Natureza, Empresária por Vocação</p>
+                
+                <div className="w-20 h-1 bg-brand-gold rounded-full mb-10"></div>
+                
+                <p className="text-lg text-gray-600 leading-relaxed font-medium mb-12 max-w-2xl">
+                  Samara Rosa é uma empresária experiente e consultora especializada em PMEs, com foco especial em óticas. Criadora do método prático que originou a <span className="text-brand-action font-bold">Jornada CEO 5 Estrelas</span>.
+                </p>
+
+                <div className="grid md:grid-cols-2 gap-x-12 gap-y-6 text-left mb-12 bg-white p-8 rounded-3xl shadow-sm border border-gray-100 w-full max-w-3xl">
+                  {[
+                    "Batedora de metas há 30+ anos",
+                    "Empresária há 10+ anos",
+                    "Fundadora da rede Óticas Sião",
+                    "Consultora especialista em PMEs",
+                    "Administradora habilidosa",
+                    "Ativa nas causas sociais"
+                  ].map((item, i) => (
+                    <div key={i} className="flex items-center gap-3">
+                      <CheckCircle size={20} className="text-brand-gold shrink-0" />
+                      <span className="font-bold text-brand-dark">{item}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <p className="text-lg text-gray-500 leading-relaxed max-w-2xl">
+                  Sua trajetória é marcada pela superação e pela busca constante pela excelência. Hoje, ela dedica sua expertise a mentorar outros empreendedores que desejam sair da operação e assumir o papel estratégico de CEO.
+                </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-24 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+             <span className="text-brand-action font-black uppercase tracking-[0.2em] text-xs">Público Alvo</span>
+             <h2 className="text-3xl md:text-4xl font-serif font-bold text-brand-dark mt-3">Para Quem é o Método?</h2>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {/* Card 1 */}
+            <div className="group relative bg-brand-stone p-10 rounded-[2.5rem] hover:bg-white border border-transparent hover:border-brand-gold/30 hover:shadow-2xl transition-all duration-500 overflow-hidden">
+               <div className="absolute top-0 right-0 w-32 h-32 bg-brand-gold/10 rounded-bl-full -mr-8 -mt-8 transition-transform group-hover:scale-150"></div>
+               <div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center mb-6 shadow-sm group-hover:bg-brand-gold group-hover:text-white transition-colors relative z-10">
+                 <Store size={28} />
+               </div>
+               <h3 className="text-2xl font-serif font-bold text-brand-dark mb-4 relative z-10">Quem quer abrir uma ótica</h3>
+               <p className="text-gray-600 font-medium leading-relaxed relative z-10">
+                 Comece do jeito certo, sem queimar caixa com erros básicos de layout, mix de produtos e precificação.
+               </p>
+            </div>
+
+            {/* Card 2 */}
+            <div className="group relative bg-brand-dark p-10 rounded-[2.5rem] text-white hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 overflow-hidden">
+               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand-gold to-brand-action"></div>
+               <div className="w-14 h-14 bg-white/10 rounded-2xl flex items-center justify-center mb-6 backdrop-blur-sm group-hover:bg-brand-action transition-colors">
+                 <LockKeyholeOpen size={28} className="text-brand-gold group-hover:text-white" />
+               </div>
+               <h3 className="text-2xl font-serif font-bold text-white mb-4">Quem já opera e quer destravar</h3>
+               <p className="text-gray-400 font-medium leading-relaxed group-hover:text-gray-200 transition-colors">
+                 Para donos que se sentem reféns da operação e querem processos que funcionam sem a sua presença constante.
+               </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="metodo" className="py-24 bg-brand-stone relative">
+        <div className="container mx-auto px-4 relative z-10">
+           <div className="text-center max-w-4xl mx-auto mb-16">
+              <div className="flex items-center justify-center gap-2 mb-4">
+                 <div className="flex text-brand-gold">
+                   {[...Array(5)].map((_, i) => <Star key={i} size={16} fill="currentColor" />)}
+                 </div>
+                 <span className="text-brand-gold font-bold uppercase tracking-widest text-xs">Método Exclusivo</span>
+              </div>
+              <h2 className="text-3xl md:text-5xl font-serif font-bold text-brand-dark mb-6 leading-tight">
+                Jornada CEO 5 Estrelas
+              </h2>
+              <p className="text-gray-600 text-lg leading-relaxed max-w-3xl mx-auto">
+                Acesse os passos práticos que ninguém ensina, e que vão te transformar em um(a) CEO de excelência, acelerando seu aprendizado e os resultados do seu negócio.
+              </p>
+           </div>
+
+           <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-6">
+              {[
+                {
+                  icon: BarChart,
+                  title: "Gestão & Métricas",
+                  desc: "Indicadores claros para tomada de decisão assertiva"
+                },
+                {
+                  icon: Users,
+                  title: "Vendas & Experiência",
+                  desc: "Encante clientes e aumente seu faturamento"
+                },
+                {
+                  icon: Settings,
+                  title: "Operações & Processos",
+                  desc: "Eficiência operacional que libera seu tempo"
+                },
+                {
+                  icon: Target,
+                  title: "Pessoas & Liderança",
+                  desc: "Time engajado e cultura de alta performance"
+                },
+                {
+                  icon: DollarSign,
+                  title: "Finanças & Precificação",
+                  desc: "Margem saudável e crescimento sustentável"
+                }
+              ].map((item, idx) => (
+                <div key={idx} className="bg-white p-8 rounded-[2rem] shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 border border-white/50 group h-full flex flex-col items-center text-center">
+                   <div className="w-14 h-14 bg-brand-gold/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-brand-gold group-hover:text-brand-dark transition-colors">
+                      <item.icon size={28} className="text-brand-gold group-hover:text-white transition-colors" />
+                   </div>
+                   <h3 className="font-serif font-bold text-brand-dark text-lg mb-4 leading-tight">{item.title}</h3>
+                   <p className="text-sm text-gray-500 font-medium leading-relaxed">{item.desc}</p>
+                </div>
+              ))}
+           </div>
+           
+           <div className="mt-16 text-center">
+              <button 
+                onClick={() => navigateTo('diagnostic')}
+                className="bg-brand-action text-white hover:bg-brand-dark px-10 py-5 rounded-full font-bold text-sm transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1 uppercase tracking-widest inline-flex items-center gap-3"
+              >
+                Descubra como o Método pode te ajudar <ArrowRight size={20} />
+              </button>
+           </div>
+        </div>
+      </section>
+
+      <section id="servicos" className="py-24 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-20">
+            <h2 className="text-3xl md:text-4xl font-serif font-bold text-brand-dark mb-4">Escolha Seu Próximo Passo</h2>
+            <p className="text-gray-500 max-w-2xl mx-auto font-medium mb-4">Mentorias focadas em transformar sua mentalidade e os números da sua empresa.</p>
+            <button 
+              onClick={() => navigateTo('diagnostic')} 
+              className="text-brand-action font-bold hover:underline text-sm uppercase tracking-wide hover:text-brand-dark transition-colors"
+            >
+              Ainda não sabe o que é melhor pra você? Faça agora o Diagnóstico gratuito para descobrir.
+            </button>
+          </div>
+
+          <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-8">
+            {OFFERS.map((offer) => (
+              <div 
+                key={offer.id} 
+                className={`relative flex flex-col p-8 rounded-3xl bg-white shadow-sm border-2 transition-all hover:shadow-xl hover:-translate-y-1 ${
+                  offer.highlight ? 'border-brand-gold ring-8 ring-brand-gold/5' : 'border-brand-stone'
+                }`}
+              >
+                {offer.highlight && (
+                  <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-brand-gold text-brand-dark text-[10px] font-black px-4 py-1 rounded-full uppercase tracking-tighter shadow-sm">
+                    Destaque
+                  </div>
+                )}
+                
+                <h3 className="text-lg font-bold text-brand-dark mb-6 min-h-[48px] font-serif leading-tight">{offer.title}</h3>
+                
+                <div className="mb-8">
+                  {offer.originalPrice && (
+                    <span className="text-xs text-gray-400 line-through block font-bold mb-1">{offer.originalPrice}</span>
+                  )}
+                  <span className="text-3xl font-bold text-brand-safe tracking-tighter">{offer.priceDisplay}</span>
+                </div>
+
+                <ul className="flex-grow space-y-4 mb-10">
+                  {offer.features.map((feat, idx) => (
+                    <li key={idx} className="flex items-start gap-3 text-xs text-gray-600 font-bold leading-relaxed">
+                      <CheckCircle size={16} className="text-brand-gold shrink-0" />
+                      <span>{feat}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <button 
+                  onClick={() => openWhatsApp(`Olá! Tenho interesse em: ${offer.title}`)}
+                  className={`w-full py-4 rounded-xl font-bold transition-all uppercase tracking-widest text-xs ${
+                    offer.highlight 
+                      ? 'bg-brand-action text-white hover:bg-brand-dark' 
+                      : 'bg-brand-stone text-brand-dark hover:bg-gray-200'
+                  }`}
+                >
+                  {offer.cta}
+                </button>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-16 text-center bg-brand-stone p-8 rounded-3xl border border-gray-100 max-w-3xl mx-auto shadow-inner">
+            <p className="font-bold text-brand-dark mb-4 uppercase tracking-widest text-sm">Garantia de Qualidade e Segurança</p>
+            <div className="flex flex-wrap justify-center gap-8 text-xs font-black text-brand-safe">
+              <span className="flex items-center gap-2 bg-white px-4 py-2 rounded-full shadow-sm"><Check size={14}/> PAGAMENTO SEGURO</span>
+              <span className="flex items-center gap-2 bg-white px-4 py-2 rounded-full shadow-sm"><Check size={14}/> SATISFAÇÃO GARANTIDA</span>
+              <span className="flex items-center gap-2 bg-white px-4 py-2 rounded-full shadow-sm"><Check size={14}/> SUPORTE VIP</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-24 bg-brand-action text-white text-center relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-full bg-brand-dark/10"></div>
+        <div className="container mx-auto px-4 relative z-10">
+          <h2 className="text-3xl md:text-5xl font-serif font-bold mb-8 leading-tight">Chega de trabalhar apenas para pagar boletos.</h2>
+          <p className="text-xl opacity-90 mb-10 max-w-2xl mx-auto font-medium">
+            Tire o peso do operacional das suas costas e assuma a cadeira de CEO do seu negócio. Comece pelo diagnóstico gratuito.
+          </p>
+          <button 
+            onClick={() => navigateTo('diagnostic')}
+            className="bg-white text-brand-action hover:bg-brand-dark hover:text-white px-12 py-5 rounded-full font-bold text-xl shadow-2xl transition-all uppercase tracking-widest"
+          >
+            Quero Ser CEO 5 Estrelas
+          </button>
+        </div>
+      </section>
+
+      <Footer />
+    </div>
+  );
+};
+
+const App: React.FC = () => {
+  return <AppContent />;
+};
+
+export default App;
