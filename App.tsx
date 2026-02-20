@@ -214,7 +214,7 @@ const App: React.FC = () => {
                 />
                 <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-brand-dark/90 to-transparent p-8 pt-24 text-white">
                   <p className="font-serif text-2xl font-bold tracking-tight">Samara Rosa</p>
-                  <p className="text-brand-gold font-bold uppercase tracking-widest text-xs mt-1">CEO 5 Estrelas e Fundadora das Óticas Sião</p>
+                  <p className="text-brand-gold font-bold uppercase tracking-widest text-xs mt-1">CEO 5 Estrelas</p>
                 </div>
               </div>
               <div className="absolute top-10 -left-6 bg-white p-5 rounded-xl shadow-xl border-l-4 border-brand-gold max-w-[150px] z-20">
@@ -250,8 +250,8 @@ const App: React.FC = () => {
                   {[
                     "Batedora de metas há 20 anos",
                     "Empresária há 10+ anos",
-                    "Fundadora da rede Óticas Sião",
-                    "Consultora especialista em PMEs",
+                    "Consultoria Especialista em Óticas",
+                    "Foco em Pequenas e Médias Empresas",
                     "Administradora habilidosa",
                     "Ativa nas causas sociais"
                   ].map((item, i) => (
