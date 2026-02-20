@@ -13,6 +13,7 @@ export interface ServiceOffer {
   highlight?: boolean;
   isNew?: boolean;
   badge?: string;
+  customMessage?: string;
 }
 
 export interface Question {

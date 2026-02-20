@@ -7,6 +7,7 @@ export const OFFERS: ServiceOffer[] = [
     id: 'mentoria-pratica',
     title: 'Mentoria Prática',
     priceDisplay: 'R$ 399',
+    originalPrice: 'R$ 599',
     installment: 'ou 2x de R$ 229,43',
     features: [
       '01 mentoria online de até 02 horas',
@@ -32,7 +33,8 @@ export const OFFERS: ServiceOffer[] = [
     ],
     cta: 'ENTRAR NA LISTA',
     highlight: false,
-    badge: 'Em Breve'
+    badge: 'Em Breve',
+    customMessage: 'Olá! Vim pelo site e gostaria de *entrar na lista* para acessar a *Jornada Online CEO Óptica*'
   },
   {
     id: 'jornada-presencial',

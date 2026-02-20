@@ -52,8 +52,9 @@ const App: React.FC = () => {
     window.open(`https://wa.me/${phoneNumber}?text=${encodedMessage}`, '_blank');
   };
 
-  const handleContract = (title: string) => {
-    openWhatsApp(`Olá! Vim pelo site e gostaria de saber mais sobre: ${title}`);
+  const handleContract = (title: string, customMessage?: string) => {
+    const message = customMessage || `Olá! Vim pelo site e gostaria de saber mais sobre: ${title}`;
+    openWhatsApp(message);
   };
 
   const Header = () => (
@@ -444,7 +445,7 @@ const App: React.FC = () => {
                 </ul>
 
                 <button 
-                  onClick={() => handleContract(offer.title)}
+                  onClick={() => handleContract(offer.title, offer.customMessage)}
                   className={`w-full py-4 rounded-xl font-bold transition-all uppercase tracking-widest text-xs ${
                     offer.highlight 
                       ? 'bg-brand-action text-white hover:bg-brand-dark' 
