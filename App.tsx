@@ -7,7 +7,7 @@ import {
   BarChart, CheckCircle, Check, Award, ShieldCheck,
   Store, Settings, DollarSign, MessageCircle,
   Package, Handshake, UserPlus, Truck, Megaphone, Cpu, Info,
-  Users, Target
+  Users, Target, Clock
 } from 'lucide-react';
 
 const SAMARA_PHOTO = "https://temperini.github.io/samara-consult/foto_samara_rosa_consultora_pme_oticas_ceo_5_estrelas.jpg";
@@ -392,6 +392,18 @@ const App: React.FC = () => {
             </button>
           </div>
 
+          <div className="max-w-3xl mx-auto mb-12 animate-pulse">
+            <div className="bg-red-50 border-2 border-red-100 rounded-2xl p-6 flex flex-col items-center justify-center gap-2 text-red-800 shadow-md text-center">
+              <div className="flex items-center gap-2 text-red-600 mb-1">
+                <Clock size={24} className="shrink-0" />
+                <span className="font-black uppercase tracking-widest text-lg md:text-xl">⚡ Oferta por Tempo Limitado!</span>
+              </div>
+              <p className="font-bold text-sm md:text-base leading-tight opacity-90">
+                Garanta essas condições especiais antes que o lote vire!
+              </p>
+            </div>
+          </div>
+
           <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-8">
             {OFFERS.map((offer) => (
               <div 
@@ -416,9 +428,14 @@ const App: React.FC = () => {
                   {offer.originalPrice && (
                     <span className="text-xs text-gray-400 line-through block font-bold mb-1">{offer.originalPrice}</span>
                   )}
-                  <span className="text-3xl font-bold text-brand-safe tracking-tighter block">{offer.priceDisplay}</span>
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="text-3xl font-bold text-brand-safe tracking-tighter">{offer.priceDisplay}</span>
+                    {offer.priceDisplay !== 'Sob Consulta' && (
+                      <span className="text-[10px] font-black text-brand-safe bg-brand-safe/10 px-2 py-0.5 rounded uppercase tracking-widest border border-brand-safe/20">à vista</span>
+                    )}
+                  </div>
                   {offer.installment && (
-                    <span className="text-xs text-gray-500 font-bold mt-1 block">{offer.installment}</span>
+                    <span className="text-xs text-gray-500 font-bold block">{offer.installment}</span>
                   )}
                 </div>
 
